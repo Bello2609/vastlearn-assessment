@@ -1,3 +1,5 @@
+import * as images from "./images";
+import { Option } from "./Types/Types";
 export const SubjectOption = [
     {
         value: 1,
@@ -86,4 +88,64 @@ export const TimeOption = [
         value: 2,
         label: "01:00:00"
     },
+]
+export const options: Option[] = [
+    {
+        value: 1,
+        label: "JAMB"
+    },
+    {
+        value: 1,
+        label: "WAEC"
+    }
+]
+export const Recommend = [
+    {
+        logo: images.JAMB,
+        exam_name: "JAMB"
+    },
+    {
+        logo: images.neco,
+        exam_name: "NECO"
+    },
+    {
+        logo: images.waec,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.waec,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.waec,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.ielt,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.JAMB,
+        exam_name: "JAMB"
+    },
+    {
+        logo: images.neco,
+        exam_name: "NECO"
+    },
+    {
+        logo: images.waec,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.waec,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.waec,
+        exam_name: "WAEC"
+    },
+    {
+        logo: images.ielt,
+        exam_name: "WAEC"
+    }
 ]

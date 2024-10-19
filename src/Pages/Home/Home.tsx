@@ -1,69 +1,10 @@
 import { useState } from "react";
 import Select from "react-dropdown-select";
-import * as images from  "../../images";
 import { Option } from "../../Types/Types";
+import { Recommend, options } from "../../data";
 
 
-const options: Option[] = [
-    {
-        value: 1,
-        label: "JAMB"
-    },
-    {
-        value: 1,
-        label: "WAEC"
-    }
-]
-const Recommend = [
-    {
-        logo: images.JAMB,
-        exam_name: "JAMB"
-    },
-    {
-        logo: images.neco,
-        exam_name: "NECO"
-    },
-    {
-        logo: images.waec,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.waec,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.waec,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.ielt,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.JAMB,
-        exam_name: "JAMB"
-    },
-    {
-        logo: images.neco,
-        exam_name: "NECO"
-    },
-    {
-        logo: images.waec,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.waec,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.waec,
-        exam_name: "WAEC"
-    },
-    {
-        logo: images.ielt,
-        exam_name: "WAEC"
-    }
-]
+
 const Home = ()=>{
     const [values, setValues ] = useState<Option[]>([]);
     return (

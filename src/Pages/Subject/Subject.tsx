@@ -1,6 +1,8 @@
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import * as images from "../../images";
 import FormSelect from "../../Components/FormSelect/FormSelect";
+import CustomButton from "../../Components/CustomButton/CustomButton";
 import { 
     SubjectOption,
     YearOption, 
@@ -10,7 +12,8 @@ import {
     TopicOption 
 } from "../../data";
 
-const Subject = ()=>{
+
+const Subject: FC = ()=>{
     const navigate = useNavigate();
     return (
         <>
@@ -50,6 +53,7 @@ const Subject = ()=>{
                       placeholder="02:00:00"
                       options={TimeOption}
                       />
+                    <CustomButton type="submit" text="Start" />
                 </div>
             
             </div>
