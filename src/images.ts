@@ -5,6 +5,11 @@ import settings from "./assets/icon/setting.png";
 import logout from "./assets/icon/Vector.png";
 import dark from "./assets/icon/Icons.png";
 import toggle from "./assets/icon/toggle.png";
+import neco from "./assets/neco.png";
+import waec from "./assets/waec.png";
+import ielt from "./assets/ielt.png";
+import JAMB from "./assets/JAMB.png";
+
 
 export{
     Excelaiicon62,
@@ -13,5 +18,9 @@ export{
     settings,
     logout,
     dark,
-    toggle
+    toggle,
+    neco,
+    ielt,
+    waec,
+    JAMB
 }
