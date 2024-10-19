@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 const Layout = lazy(()=> import("./Pages/Layout/Layout"));
 const Home = lazy(()=>import("./Pages/Home/Home"));
+const Subject = lazy(()=>import("./Pages/Subject/Subject"));
 const Router = ()=>{
     return (
         <Routes>
@@ -11,6 +12,14 @@ const Router = ()=>{
                 <Suspense>
                     <Layout>
                         <Home />
+                    </Layout>
+                </Suspense>
+            } />
+            <Route path="/select-subject" 
+            element={
+                <Suspense>
+                    <Layout>
+                        <Subject />
                     </Layout>
                 </Suspense>
             } />

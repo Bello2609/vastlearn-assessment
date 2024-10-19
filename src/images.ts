@@ -5,6 +5,7 @@ import settings from "./assets/icon/setting.png";
 import logout from "./assets/icon/Vector.png";
 import dark from "./assets/icon/Icons.png";
 import toggle from "./assets/icon/toggle.png";
+import arrowleft from "./assets/icon/arrowleft.png";
 import neco from "./assets/neco.png";
 import waec from "./assets/waec.png";
 import ielt from "./assets/ielt.png";
@@ -16,6 +17,7 @@ export{
     home,
     health,
     settings,
+    arrowleft,
     logout,
     dark,
     toggle,

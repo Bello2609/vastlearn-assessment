@@ -1,11 +1,9 @@
 import { useState } from "react";
 import Select from "react-dropdown-select";
 import * as images from  "../../images";
+import { Option } from "../../Types/Types";
 
-type Option = {
-    value: number,
-    label: string
-}
+
 const options: Option[] = [
     {
         value: 1,
@@ -83,7 +81,10 @@ const Home = ()=>{
                             values={values}
                             style={{
                                 width: "500px",
-                                marginTop: "20px"
+                                marginTop: "20px",
+                                border: "1px solid #111113",
+                                borderRadius: "10px",
+                                height: "60px"
                             }}
                             placeholder="https://gsjvfsjkskahdhjdjdklaadujmsn"                       
                         />
