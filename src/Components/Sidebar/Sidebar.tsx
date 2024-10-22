@@ -22,7 +22,7 @@ const Sidebar = ()=>{
                             <img src={images.home} className="mr-4" />
                             <p className="font-sansM text-[#A5A5A5] font-medium">Home</p>
                         </NavLink>
-                        <NavLink to="/" className="flex items-center w-full h-[56px] p-4 bg-[#009EFD] rounded-full mt-20">
+                        <NavLink to="/select-subject" className="flex items-center w-full h-[56px] p-4 bg-[#009EFD] rounded-full mt-20">
                             <img src={images.health} className="mr-4" />
                             <p className="font-sansM text-[#fff] font-medium">CBT</p>
                         </NavLink>
