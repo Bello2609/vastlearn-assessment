@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as images from "../../images";
+import { axiosInstance } from "../../axios";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import SubmitModal from "../../Components/Modal/SubmitModal";
 import SubmitScoreModal from "../../Components/Modal/SubmitScoreModal";
-const Test = ()=>{
-    const [ selected, setSelected ] = useState<string>("");
-    const [ isSubmitModal, setIsSubmitModal ] = useState<boolean>(false);
-    const [ isSubmitScoreModal, setIsSubmitScoreModal ] = useState<boolean>(false);
+import Questions from "../../Components/Questions/Questions";
+import { Question } from "../../Types/Types";
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    setSelected(event.target.value);
-    }
+const Test = ()=>{
+    const [ isSubmitModal, setIsSubmitModal ] = useState<boolean>(false);
+    const [ allQuestions, setAllQuestions ] = useState<Question[]>([])
+    const [ isSubmitScoreModal, setIsSubmitScoreModal ] = useState<boolean>(false);
+    const [ selectedAnswer, setSelectedAnswer ] = useState<{ [key: number]: string }>("");
+
+
     const cancelSubmit = ()=>{
         setIsSubmitModal(!isSubmitModal);
     }
@@ -18,6 +21,46 @@ const Test = ()=>{
         setIsSubmitModal(!isSubmitModal);
         setIsSubmitScoreModal(!isSubmitScoreModal)
     }
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, i:number)=>{
+        const value = event.target.value;
+        setSelectedAnswer(prev=>({
+            ...prev,
+            [i]: value
+        }))
+    }
+    // calculate total score
+    const calculateScore = ()=>{
+        let score = 0;
+        Object.keys(selectedAnswer).forEach((key: string)=>{
+            const questionIndex = parseInt(key);
+            let correct_answer = allQuestions[questionIndex].correct_answer;
+            if(selectedAnswer[questionIndex] == correct_answer){
+                score += 10;
+            }
+        }) 
+    }
+    const allQuestionedAnswered = Object.keys(selectedAnswer).length === allQuestions.length;
+    useEffect(()=>{
+        axiosInstance.get("api.php?amount=10&category=9&difficulty=easy&type=multiple").then(res=>{
+            console.log(res.data?.results);
+            const question_data: Question[] = res?.data?.results.map((data: any)=>{
+                const answerChoices = [...data.incorrect_answers];
+                const random_index_for_correct_answer = Math.floor(Math.random() * 4);
+                answerChoices.splice(random_index_for_correct_answer, 0, data.correct_answer);
+                const allQuestion = {
+                    que_stion: data.question,
+                    correct_answer: data.correct_answer,
+                    answer: answerChoices
+                }
+                console.log(allQuestion);
+                return allQuestion
+            });
+            setAllQuestions(question_data)
+        }).catch(err=>{
+            console.log(err);
+        });
+        
+    }, [])
     return(
         <>
             <div className="w-[75%] p-10 relative">
@@ -31,61 +74,34 @@ const Test = ()=>{
                         <p className="flex justify-center text-[#fff] font-sans font-bold items-center bg-[#009EFD] rounded-md p-5">2:00:00</p>
                     </div>
                 </div>
-                <div className="flex mt-5">
+                    <div className="flex mt-5">
                     {/* list of questions */}
                     <div className="flex flex-col w-1/2">
-                        <div className="flex flex-col mb-5">
-                            <h5 className="font-sansM font-normal text-2xl">Question 1</h5>
-                            <p className="font-sansM font-medium text-[#505050] text-lg my-3">Identify the correct antonym for the word "abundant."</p>
-                            <div className="flex flex-col">
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Plentiful" } onChange={handleChange} value="Plentiful" />&nbsp; Plentiful
-                                </div>
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Sparse" } onChange={handleChange} value="Sparse" />&nbsp; Sparse
-                                    
-                                </div>
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Overflowing" } onChange={handleChange} value="Overflowing" />&nbsp; Overflowing
-                                   
-                                </div>
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Copious" } onChange={handleChange} value="Copious" />&nbsp; Copious
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div className="flex flex-col">
-                            <h5 className="font-sansM font-normal text-2xl">Question 1</h5>
-                            <p className="font-sansM font-medium text-[#505050] text-lg my-3">Identify the correct antonym for the word "abundant."</p>
-                            <div className="flex flex-col">
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Plentiful" } onChange={handleChange} value="Plentiful" />&nbsp; Plentiful
-                                </div>
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Sparse" } onChange={handleChange} value="Sparse" />&nbsp; Sparse
-                                    
-                                </div>
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Overflowing" } onChange={handleChange} value="Overflowing" />&nbsp; Overflowing
-                                   
-                                </div>
-                                <div className="text-lg text-[#505050] font-sansM flex">
-                                    <input type="radio" style={{ width: "15px" }} checked={ selected === "Copious" } onChange={handleChange} value="Copious" />&nbsp; Copious
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>
+                       {
+                            allQuestions.map((data, i)=>{
+                                return (
+                                    <Questions 
+                                        key={i} 
+                                        question_number={ i + 1 } 
+                                        que_stion={data.que_stion} 
+                                        answer={data.answer} 
+                                        selected={selectedAnswer[i] || ""}
+                                        onChange={(event)=>handleChange(event, i)}
+                                    />
+                                )
+                            })
+                       } 
+                        
                     </div>
                     <div className="w-1/2">
                         {/* questions list */}
                         <div className="grid grid-cols-10 gap-4 mb-10">
                             {
-                                Array.from(Array(50).keys()).map(num=> num + 1).map(data=>(
+                                Array.from(Array(10).keys()).map((num: number)=> num + 1).map((data: number)=>(
                                     <p className="flex justify-center items-center w-[38px] h-[38px] border-2 rounded-md" 
-                                style={{ background: "rgba(0, 158, 253, 0.2)", border: "1px solid rgba(0, 158, 253, 0.5)" }}>{data}</p>
+                                        style={{ 
+                                            background: selectedAnswer[data - 1] ? "rgba(0, 158, 253, 0.2)" : "#fff", 
+                                            border: selectedAnswer[data - 1]? "1px solid rgba(0, 158, 253, 0.5)" :  "ipx solid rgba(17, 17, 19, 0.2)"}}>{data}</p>
                                 ))
                             }
 
@@ -94,8 +110,9 @@ const Test = ()=>{
                         <CustomButton text="Submit" type="submit" isModal={false}  onClick={()=> setIsSubmitModal(!isSubmitModal)}/>
                     </div>
                 </div>
+                
                 {
-                    isSubmitModal && (<SubmitModal cancel={cancelSubmit} submit={submitModal} />)
+                    (isSubmitModal && allQuestionedAnswered) && (<SubmitModal cancel={cancelSubmit} submit={submitModal} />) 
                 }
                 {
                     isSubmitScoreModal && (<SubmitScoreModal />)

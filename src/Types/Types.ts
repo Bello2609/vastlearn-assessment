@@ -21,3 +21,11 @@ export interface Submitmodal {
     cancel: React.MouseEventHandler<HTMLButtonElement>,
     submit: React.MouseEventHandler<HTMLButtonElement>
 }
+
+export interface Question {
+    question_number: number,
+    que_stion: string,
+    correct_answer: string,
+    answer: string[]
+
+}
