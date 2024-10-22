@@ -4,7 +4,7 @@ import { RiSearchLine } from "react-icons/ri";
 const Sidebar = ()=>{
     return (
         <>
-            <div className="flex flex-col justify-between w-[30%] h-auto border-2 border-[#EFEFEF] p-16">
+            <div className="flex flex-col justify-between w-[25%] h-auto border-2 border-[#EFEFEF] p-10">
                 <div className="flex flex-col">
                     <div className="flex items-center">
                         <img src={images.Excelaiicon62} />

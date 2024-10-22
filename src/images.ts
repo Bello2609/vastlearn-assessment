@@ -10,6 +10,7 @@ import neco from "./assets/neco.png";
 import waec from "./assets/waec.png";
 import ielt from "./assets/ielt.png";
 import JAMB from "./assets/JAMB.png";
+import yay from "./assets/yay.png";
 
 
 export{
@@ -24,5 +25,6 @@ export{
     neco,
     ielt,
     waec,
-    JAMB
+    JAMB,
+    yay
 }

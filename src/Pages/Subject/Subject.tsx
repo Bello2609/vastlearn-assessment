@@ -53,7 +53,7 @@ const Subject: FC = ()=>{
                       placeholder="02:00:00"
                       options={TimeOption}
                       />
-                    <CustomButton type="submit" text="Start" />
+                    <CustomButton type="submit" text="Start" isModal={false} onClick={()=> navigate("/confirm")} />
                 </div>
             
             </div>
