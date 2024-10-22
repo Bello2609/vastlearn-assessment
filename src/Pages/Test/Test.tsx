@@ -29,16 +29,16 @@ const Test = ()=>{
         }))
     }
     // calculate total score
-    const calculateScore = ()=>{
-        let score = 0;
-        Object.keys(selectedAnswer).forEach((key: string)=>{
-            const questionIndex = parseInt(key);
-            let correct_answer = allQuestions[questionIndex].correct_answer;
-            if(selectedAnswer[questionIndex] == correct_answer){
-                score += 10;
-            }
-        }) 
-    }
+    // const calculateScore = ()=>{
+    //     let score = 0;
+    //     Object.keys(selectedAnswer).forEach((key: string)=>{
+    //         const questionIndex = parseInt(key);
+    //         let correct_answer = allQuestions[questionIndex].correct_answer;
+    //         if(selectedAnswer[questionIndex] == correct_answer){
+    //             score += 10;
+    //         }
+    //     }) 
+    // }
     const allQuestionedAnswered = Object.keys(selectedAnswer).length === allQuestions.length;
     useEffect(()=>{
         axiosInstance.get("api.php?amount=10&category=9&difficulty=easy&type=multiple").then(res=>{
